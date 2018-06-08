@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         fetchPosts();
 
+        // Create properties for RecyclerView
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecycleView.setLayoutManager(mLayoutManager);
         mRecycleView.setItemAnimator(new DefaultItemAnimator());
