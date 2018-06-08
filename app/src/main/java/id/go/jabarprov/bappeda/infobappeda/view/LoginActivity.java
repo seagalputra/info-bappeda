@@ -29,13 +29,13 @@ import id.go.jabarprov.bappeda.infobappeda.model.Login;
 import id.go.jabarprov.bappeda.infobappeda.session.SessionManagement;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String INTENT_EXTRA = "PHONE_NUMBER";
     private static final String TAG_NAME = MainActivity.class.getSimpleName();
     private static final String URL_LOGIN = "https://api.jsonbin.io/b/5b18b16dc2e3344ccd96cee1";
     private RequestQueue requestQueue;
     private Gson gson;
     private List<Login> loginList = new ArrayList<>();
 
-    private Button btnLogin;
     private SessionManagement sessionManagement;
     private EditText textPhone;
 
@@ -58,12 +58,12 @@ public class LoginActivity extends AppCompatActivity {
         fetchData();
     }
 
-    public void fetchData() {
+    private void fetchData() {
         StringRequest request = new StringRequest(Request.Method.GET, URL_LOGIN, onDataLoaded, onDataError);
         requestQueue.add(request);
     }
 
-    public final Response.Listener<String> onDataLoaded = new Response.Listener<String>() {
+    private final Response.Listener<String> onDataLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
             loginList = Arrays.asList(gson.fromJson(response, Login[].class));
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-    public final Response.ErrorListener onDataError = new Response.ErrorListener() {
+    private final Response.ErrorListener onDataError = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
             Log.e(TAG_NAME, error.toString());
@@ -97,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                 sessionManagement.createLoginSession(phone);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(INTENT_EXTRA, textPhone.getText().toString());
                 startActivity(intent);
                 finish();
             } else {

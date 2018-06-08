@@ -10,6 +10,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,17 +27,21 @@ import java.util.List;
 
 import id.go.jabarprov.bappeda.infobappeda.R;
 import id.go.jabarprov.bappeda.infobappeda.adapter.MessageAdapter;
+import id.go.jabarprov.bappeda.infobappeda.model.Login;
 import id.go.jabarprov.bappeda.infobappeda.model.Message;
 import id.go.jabarprov.bappeda.infobappeda.session.SessionManagement;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String INTENT_EXTRA = "PHONE_NUMBER";
     // JSON URL DATA
-    private static final String URL_DATA = "https://api.jsonbin.io/b/5b177b28c83f6d4cc734aaff/1";
+    private static final String URL_DATA = "https://api.jsonbin.io/b/5b177b28c83f6d4cc734aaff/2";
     private RequestQueue requestQueue;
 
     private static final String TAG_NAME = MainActivity.class.getSimpleName();
     private List<Message> messageList = new ArrayList<>();
+    private List<Message> filteredMessage = new ArrayList<>();
+
     private RecyclerView mRecycleView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -47,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Session management
     private SessionManagement sessionManagement;
-    private Context context;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Check user login
         sessionManagement = new SessionManagement(getApplicationContext());
         sessionManagement.checkLogin();
+        phone = getIntent().getStringExtra(INTENT_EXTRA);
 
         // Find RecyclerView in main_activity layout and define it's properties
         mRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -87,9 +93,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResponse(String response) {
             messageList = Arrays.asList(gson.fromJson(response, Message[].class));
-            mAdapter = new MessageAdapter(messageList);
+
+            for (int i = 0; i < messageList.size(); i++) {
+                if (messageList.get(i).getPhone().equals(phone)) {
+                    filteredMessage.add(messageList.get(i));
+                }
+            }
+
+            mAdapter = new MessageAdapter(filteredMessage);
             mRecycleView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
 
             Log.i(TAG_NAME, messageList.size() + " messages loaded.");
             for (Message message : messageList) {

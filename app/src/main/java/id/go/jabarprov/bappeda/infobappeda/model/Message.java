@@ -7,14 +7,17 @@ public class Message {
     private String message;
     @SerializedName("date")
     private String date;
+    @SerializedName("phone")
+    private String phone;
 
     public Message() {
 
     }
 
-    public Message(String message, String date) {
+    public Message(String message, String date, String phone) {
         this.message = message;
         this.date = date;
+        this.phone = phone;
     }
 
     public String getMessage() {
@@ -25,11 +28,19 @@ public class Message {
         return date;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public void setMessage(String message) {
         this.message = message;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
