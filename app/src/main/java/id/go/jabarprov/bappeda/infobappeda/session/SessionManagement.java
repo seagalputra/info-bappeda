@@ -3,15 +3,19 @@ package id.go.jabarprov.bappeda.infobappeda.session;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.HashMap;
 
 import id.go.jabarprov.bappeda.infobappeda.view.LoginActivity;
+import id.go.jabarprov.bappeda.infobappeda.view.MainActivity;
 
 public class SessionManagement {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private Context _context;
+    private String phoneSession;
 
     int PRIVATE_MODE = 0;
 
@@ -69,5 +73,10 @@ public class SessionManagement {
 
     public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
+    }
+
+    public String getPhoneNumber() {
+        phoneSession = pref.getString(KEY_PHONE, "Session doesn't exsist");
+        return phoneSession;
     }
 }

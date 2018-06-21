@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Check user login
         sessionManagement = new SessionManagement(getApplicationContext());
         sessionManagement.checkLogin();
-        phone = getIntent().getStringExtra(INTENT_EXTRA);
+        phone = sessionManagement.getPhoneNumber();
 
         // Find RecyclerView in main_activity layout and define it's properties
         mRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -116,4 +116,8 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG_NAME, error.toString());
         }
     };
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
