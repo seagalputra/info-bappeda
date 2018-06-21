@@ -9,7 +9,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String INTENT_EXTRA = "PHONE_NUMBER";
     // JSON URL DATA
-    private static final String URL_DATA = "https://api.jsonbin.io/b/5b177b28c83f6d4cc734aaff/2";
+    private static final String URL_DATA = "https://api.jsonbin.io/b/5b177b28c83f6d4cc734aaff/4";
     private RequestQueue requestQueue;
 
     private static final String TAG_NAME = MainActivity.class.getSimpleName();
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private ProgressDialog pDialog;
+    private Toolbar toolbar;
 
     private Gson gson;
 
@@ -58,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
         // Check user login
         sessionManagement = new SessionManagement(getApplicationContext());
@@ -82,6 +89,24 @@ public class MainActivity extends AppCompatActivity {
         mRecycleView.setLayoutManager(mLayoutManager);
         mRecycleView.setItemAnimator(new DefaultItemAnimator());
         mRecycleView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.appbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.btnLogout:
+                sessionManagement.userLogout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void fetchPosts() {
