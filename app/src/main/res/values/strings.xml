@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">Info Bappeda</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="login_button">Login</string>
-    <string name="phone_number_text">Please enter your phone number</string>
+    <string name="phone_number">e.g 08124422xxxx</string>
+    <string name="login_button">Verifikasi</string>
+    <string name="phone_number_text">Verifikasi nomor anda untuk mendaftar</string>
     <string name="login_dialog_message_failed">
         Phone number is incorrect, please check your phone number
     </string>
     <string name="login_dialog_title_failed">Login Failed</string>
     <string name="ok">OK</string>
-    <string name="deskripsi">Menerima informasi Bappeda Jawa Barat sekarang lebih cepat!</string>
+    <string name="deskripsi">Menerima informasi Bappeda Jawa Barat sekarang lebih
+        cepat!</string>
 </resources>
