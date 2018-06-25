@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         switch (item.getItemId()) {
             case R.id.btnLogout:
                 sessionManagement.userLogout();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -145,10 +146,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             Log.e(TAG_NAME, error.toString());
         }
     };
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     @Override
     public void onRefresh() {

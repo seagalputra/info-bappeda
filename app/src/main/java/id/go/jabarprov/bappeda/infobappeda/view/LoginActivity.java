@@ -2,11 +2,13 @@ package id.go.jabarprov.bappeda.infobappeda.view;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SessionManagement sessionManagement;
     private EditText textPhone;
+    private TextInputLayout phoneInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         // Create object from SessionManagement class
         sessionManagement = new SessionManagement(getApplicationContext());
 
-        textPhone = (EditText) findViewById(R.id.textPhone);
+        phoneInputLayout = findViewById(R.id.textphone_text_input_layout);
+        textPhone = findViewById(R.id.textPhone);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         // Set custom date format on the GSON instance to handle date that return by the API
@@ -93,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (phone.trim().length() > 0) {
-            if (isPhone == true) {
+
+            if (isPhone) {
                 sessionManagement.createLoginSession(phone);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -101,12 +106,18 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                //TODO Create alert dialog if phone number is incorect
-                Toast.makeText(this, "Phone number is incorrect", Toast.LENGTH_LONG).show();
+                phoneInputLayout.setError(getString(R.string.error_msg_phone_input));
+                requestFocus(textPhone);
             }
         } else {
-            //TODO Create alert dialog if phone number is blank
-            Toast.makeText(this, "Please enter phone number", Toast.LENGTH_LONG).show();
+            phoneInputLayout.setError(getString(R.string.error_msg_input));
+            requestFocus(textPhone);
+        }
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 }

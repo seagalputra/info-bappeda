@@ -3,7 +3,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="phone_number">e.g 08124422xxxx</string>
     <string name="login_button">Verifikasi</string>
-    <string name="phone_number_text">Verifikasi nomor anda untuk mendaftar</string>
+    <string name="phone_number_text">Verifikasi nomor anda untuk masuk</string>
     <string name="login_dialog_message_failed">
         Phone number is incorrect, please check your phone number
     </string>
@@ -11,4 +11,8 @@
     <string name="ok">OK</string>
     <string name="deskripsi">Menerima informasi Bappeda Jawa Barat sekarang lebih
         cepat!</string>
+    <string name="error_msg_phone_input">Nomor telepon tidak ditemukan</string>
+    <string name="error_msg_input">Masukkan nomor telepon anda</string>
+    <string name="intro_text">Selamat Datang di Info Bappeda Jawa Barat</string>
+    <string name="btn_next">lanjutkan</string>
 </resources>

@@ -3,13 +3,11 @@ package id.go.jabarprov.bappeda.infobappeda.session;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.HashMap;
 
 import id.go.jabarprov.bappeda.infobappeda.view.LoginActivity;
-import id.go.jabarprov.bappeda.infobappeda.view.MainActivity;
+import id.go.jabarprov.bappeda.infobappeda.view.WelcomeActivity;
 
 public class SessionManagement {
     private SharedPreferences pref;
@@ -17,7 +15,7 @@ public class SessionManagement {
     private Context _context;
     private String phoneSession;
 
-    int PRIVATE_MODE = 0;
+    private int PRIVATE_MODE = 0;
 
     // Shared Preferences name
     private static final String PREF_NAME = "InfoBappedaPref";
@@ -26,7 +24,7 @@ public class SessionManagement {
     private static final String IS_LOGIN = "IsLoggedIn";
 
     // Phone number
-    public static final String KEY_PHONE = "phone";
+    private static final String KEY_PHONE = "phone";
 
     public SessionManagement(Context context) {
         this._context = context;
@@ -48,7 +46,7 @@ public class SessionManagement {
 
     public void checkLogin() {
         if (!this.isLoggedIn()) {
-            Intent intent = new Intent(_context, LoginActivity.class);
+            Intent intent = new Intent(_context, WelcomeActivity.class);
 
             // Closing all the activities
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -71,7 +69,7 @@ public class SessionManagement {
         _context.startActivity(intent);
     }
 
-    public boolean isLoggedIn() {
+    private boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
     }
 

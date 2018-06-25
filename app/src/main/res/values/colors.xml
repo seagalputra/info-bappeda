@@ -6,4 +6,5 @@
     <color name="message_text_color">#333333</color>
     <color name="Background">#F5C383</color>
     <color name="White">#FFFFFF</color>
+    <color name="text">#FF424242</color>
 </resources>
