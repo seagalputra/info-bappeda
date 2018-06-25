@@ -17,7 +17,7 @@ public class SessionManagement {
     private Context _context;
     private String phoneSession;
 
-    int PRIVATE_MODE = 0;
+    private int PRIVATE_MODE = 0;
 
     // Shared Preferences name
     private static final String PREF_NAME = "InfoBappedaPref";
@@ -26,7 +26,7 @@ public class SessionManagement {
     private static final String IS_LOGIN = "IsLoggedIn";
 
     // Phone number
-    public static final String KEY_PHONE = "phone";
+    private static final String KEY_PHONE = "phone";
 
     public SessionManagement(Context context) {
         this._context = context;
@@ -76,7 +76,7 @@ public class SessionManagement {
     }
 
     public String getPhoneNumber() {
-        phoneSession = pref.getString(KEY_PHONE, "Session doesn't exsist");
+        phoneSession = pref.getString(KEY_PHONE, null);
         return phoneSession;
     }
 }

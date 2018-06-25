@@ -63,16 +63,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
         // Check user login
         sessionManagement = new SessionManagement(getApplicationContext());
         sessionManagement.checkLogin();
-        phone = sessionManagement.getPhoneNumber();
+        phone = setPhone();
 
         // Find RecyclerView in main_activity layout and define it's properties
-        mRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecycleView = findViewById(R.id.recyclerView);
 
         // Make request queue from volley
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.btnLogout:
                 sessionManagement.userLogout();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String setPhone() {
+        return sessionManagement.getPhoneNumber();
     }
 }
