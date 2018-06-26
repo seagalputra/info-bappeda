@@ -1,8 +1,6 @@
 package id.go.jabarprov.bappeda.infobappeda.view;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,24 +28,26 @@ import java.util.List;
 
 import id.go.jabarprov.bappeda.infobappeda.R;
 import id.go.jabarprov.bappeda.infobappeda.adapter.MessageAdapter;
-import id.go.jabarprov.bappeda.infobappeda.model.Login;
 import id.go.jabarprov.bappeda.infobappeda.model.Message;
 import id.go.jabarprov.bappeda.infobappeda.session.SessionManagement;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String INTENT_EXTRA = "PHONE_NUMBER";
     // JSON URL DATA
-    private static final String URL_DATA = "https://api.jsonbin.io/b/5b177b28c83f6d4cc734aaff/4";
+    private static final String URL_DATA = "https://jsonblob.com/api/jsonBlob/d16932bd-7827-11e8-bf8a-dff87212b5a5";
     private RequestQueue requestQueue;
 
     private static final String TAG_NAME = MainActivity.class.getSimpleName();
     private List<Message> messageList = new ArrayList<>();
     private List<Message> filteredMessage = new ArrayList<>();
+    private List<Message> tempMessage;
 
     private RecyclerView mRecycleView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private Toolbar toolbar;
 
@@ -69,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
         // Check user login
         sessionManagement = new SessionManagement(getApplicationContext());
         sessionManagement.checkLogin();
-        phone = setPhone();
+        phone = sessionManagement.getPhoneNumber();
 
         // Find RecyclerView in main_activity layout and define it's properties
         mRecycleView = findViewById(R.id.recyclerView);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         // Make request queue from volley
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -113,21 +114,24 @@ public class MainActivity extends AppCompatActivity {
     private void fetchPosts() {
         StringRequest request = new StringRequest(Request.Method.GET, URL_DATA, onPostsLoaded, onPostsError);
         requestQueue.add(request);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private final Response.Listener<String> onPostsLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
             messageList = Arrays.asList(gson.fromJson(response, Message[].class));
+            tempMessage = new ArrayList<>(messageList);
 
-            for (int i = 0; i < messageList.size(); i++) {
-                if (messageList.get(i).getPhone().equals(phone)) {
-                    filteredMessage.add(messageList.get(i));
+            for (int i = 0; i < tempMessage.size(); i++) {
+                if (tempMessage.get(i).getPhone().equals(phone)) {
+                    filteredMessage.add(0, tempMessage.get(i));
                 }
             }
 
             mAdapter = new MessageAdapter(filteredMessage);
             mRecycleView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
 
             Log.i(TAG_NAME, messageList.size() + " messages loaded.");
             for (Message message : messageList) {
@@ -143,7 +147,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public String setPhone() {
-        return sessionManagement.getPhoneNumber();
+    @Override
+    public void onRefresh() {
+        mAdapter.notifyDataSetChanged();
+        tempMessage.clear();
+        filteredMessage.clear();
+        fetchPosts();
     }
 }
