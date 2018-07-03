@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.LoginActivity"
     android:background="@color/White">
 
@@ -24,9 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/Background"
-            android:textCursorDrawable="@null"
             android:ems="10"
-            android:hint="@string/phone_number" />
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:textColorLink="@color/Background"
+            android:textCursorDrawable="@null" />
 
     </android.support.design.widget.TextInputLayout>
 

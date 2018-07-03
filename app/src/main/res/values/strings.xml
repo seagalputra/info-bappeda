@@ -15,4 +15,7 @@
     <string name="error_msg_input">Masukkan nomor telepon anda</string>
     <string name="intro_text">Selamat Datang di Info Bappeda Jawa Barat</string>
     <string name="btn_next">lanjutkan</string>
+    <string name="otp_string">Masukkan kode OTP yang telah kami kirimkan melalui SMS</string>
+    <string name="button_otp">konfirmasi</string>
+    <string name="string_kode_otp">Kode OTP</string>
 </resources>

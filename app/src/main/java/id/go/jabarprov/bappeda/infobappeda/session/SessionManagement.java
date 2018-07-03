@@ -15,6 +15,8 @@ public class SessionManagement {
     private Context _context;
     private String phoneSession;
 
+    private static SessionManagement mInstance;
+
     private int PRIVATE_MODE = 0;
 
     // Shared Preferences name
@@ -26,21 +28,34 @@ public class SessionManagement {
     // Phone number
     private static final String KEY_PHONE = "phone";
 
+    // Token
+    private static final String KEY_TOKEN = "token";
+
     public SessionManagement(Context context) {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
 
-    public void createLoginSession(String phone) {
+    public static synchronized SessionManagement getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new SessionManagement(context);
+        }
+
+        return mInstance;
+    }
+
+    public void createLoginSession(String phone, String token) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_PHONE, phone);
+        editor.putString(KEY_TOKEN, token);
         editor.commit();
     }
 
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<>();
         user.put(KEY_PHONE, pref.getString(KEY_PHONE, null));
+        user.put(KEY_TOKEN, pref.getString(KEY_TOKEN, null));
         return user;
     }
 
@@ -76,5 +91,18 @@ public class SessionManagement {
     public String getPhoneNumber() {
         phoneSession = pref.getString(KEY_PHONE, null);
         return phoneSession;
+    }
+
+    public boolean saveDeviceToken(String token) {
+        SharedPreferences sharedPreferences = _context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_TOKEN, token);
+        editor.apply();
+        return true;
+    }
+
+    public String getDeviceToken() {
+        String deviceToken = pref.getString(KEY_TOKEN, null);
+        return deviceToken;
     }
 }

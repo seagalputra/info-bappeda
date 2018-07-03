@@ -13,30 +13,36 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import id.go.jabarprov.bappeda.infobappeda.R;
 import id.go.jabarprov.bappeda.infobappeda.adapter.MessageAdapter;
 import id.go.jabarprov.bappeda.infobappeda.model.Message;
+import id.go.jabarprov.bappeda.infobappeda.service.NetworkService;
 import id.go.jabarprov.bappeda.infobappeda.session.SessionManagement;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String INTENT_EXTRA = "PHONE_NUMBER";
+
     // JSON URL DATA
-    private static final String URL_DATA = "https://jsonblob.com/api/jsonBlob/d16932bd-7827-11e8-bf8a-dff87212b5a5";
-    private RequestQueue requestQueue;
+    private static final String URL_DATA = "http://60.253.116.68/info_bappeda/send_msg.php";
 
     private static final String TAG_NAME = MainActivity.class.getSimpleName();
     private List<Message> messageList = new ArrayList<>();
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Set toolbar as AppBar
         toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
@@ -75,21 +82,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        // Make request queue from volley
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-
         // Set custom date format on the GSON instance to handle date that return by the API
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         gson = gsonBuilder.create();
 
+        // Call method fetchPosts
         fetchPosts();
+
+        // Firebase
+        FirebaseMessaging.getInstance().subscribeToTopic("info_bappeda");
 
         // Create properties for RecyclerView
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecycleView.setLayoutManager(mLayoutManager);
         mRecycleView.setItemAnimator(new DefaultItemAnimator());
-        mRecycleView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
     }
 
     @Override
@@ -112,40 +119,37 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void fetchPosts() {
-        StringRequest request = new StringRequest(Request.Method.GET, URL_DATA, onPostsLoaded, onPostsError);
-        requestQueue.add(request);
-        swipeRefreshLayout.setRefreshing(false);
-    }
+        StringRequest request = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                messageList = Arrays.asList(gson.fromJson(response, Message[].class));
 
-    private final Response.Listener<String> onPostsLoaded = new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            messageList = Arrays.asList(gson.fromJson(response, Message[].class));
-            tempMessage = new ArrayList<>(messageList);
+                tempMessage = new ArrayList<>(messageList);
 
-            for (int i = 0; i < tempMessage.size(); i++) {
-                if (tempMessage.get(i).getPhone().equals(phone)) {
-                    filteredMessage.add(0, tempMessage.get(i));
+                for (int i = 0; i < tempMessage.size(); i++) {
+                    if (tempMessage.get(i).getPhone().equals(phone)) {
+                        filteredMessage.add(0, tempMessage.get(i));
+                    }
+                }
+
+                mAdapter = new MessageAdapter(filteredMessage);
+                mRecycleView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+
+                Log.i(TAG_NAME, messageList.size() + " messages loaded.");
+                for (Message message : messageList) {
+                    Log.i(TAG_NAME, message.getDate() + ": " + message.getMessage());
                 }
             }
-
-            mAdapter = new MessageAdapter(filteredMessage);
-            mRecycleView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-
-            Log.i(TAG_NAME, messageList.size() + " messages loaded.");
-            for (Message message : messageList) {
-                Log.i(TAG_NAME, message.getDate() + ": " + message.getMessage());
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG_NAME, "onErrorResponse: " + error.toString());
             }
-        }
-    };
-
-    private final Response.ErrorListener onPostsError = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.e(TAG_NAME, error.toString());
-        }
-    };
+        });
+        NetworkService.getInstance(getApplicationContext()).addToRequest(request);
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
     @Override
     public void onRefresh() {
