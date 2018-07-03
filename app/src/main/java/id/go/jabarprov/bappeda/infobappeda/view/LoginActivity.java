@@ -33,7 +33,7 @@ import id.go.jabarprov.bappeda.infobappeda.session.SessionManagement;
 public class LoginActivity extends AppCompatActivity {
     private static final String INTENT_EXTRA = "PHONE_NUMBER";
     private static final String TAG_NAME = MainActivity.class.getSimpleName();
-    private static final String URL_LOGIN = "https://api.jsonbin.io/b/5b18b16dc2e3344ccd96cee1";
+    private static final String URL_LOGIN = "http://10.13.1.18/info_bappeda/login.php";
     private RequestQueue requestQueue;
     private Gson gson;
     private List<Login> loginList = new ArrayList<>();
