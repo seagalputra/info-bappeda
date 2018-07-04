@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="id.go.jabarprov.bappeda.infobappeda.view.VerifyActivity"
+    android:background="@color/White">
+
+    <ImageView
+        android:id="@+id/image_otp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/ic_clipboard" />
+
+    <TextView
+        android:id="@+id/otp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/image_otp"
+        android:text="@string/otp_string" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/otp_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/fab_margin">
+
+        <EditText
+            android:id="@+id/input_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/string_kode_otp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_layout_otp"
+        android:ems="10"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/fab_margin"
+        android:paddingBottom="@dimen/fab_margin"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/button_otp"
+        android:background="@drawable/btn_style_lanjut"
+        android:onClick="verify"/>
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "537389274658",
+    "firebase_url": "https://info-bappeda-8257c.firebaseio.com",
+    "project_id": "info-bappeda-8257c",
+    "storage_bucket": "info-bappeda-8257c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537389274658:android:c9387d2875a6606b",
+        "android_client_info": {
+          "package_name": "id.go.jabarprov.bappeda.infobappeda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537389274658-f6h4d5ef0u3cln34mu7f93jr301ou6tu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.go.jabarprov.bappeda.infobappeda",
+            "certificate_hash": "997c4a5de057585c7b35eef663f6696c131b5dcb"
+          }
+        },
+        {
+          "client_id": "537389274658-i2krjdli6jir7daoolr5sqccetvbp59c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.go.jabarprov.bappeda.infobappeda",
+            "certificate_hash": "6ce56490f1ce5062cb8d89f8904cdb8657451dae"
+          }
+        },
+        {
+          "client_id": "537389274658-st50o4l09oa6h11cohmgdh86p6076g19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp5UEZZnVQTWBP2FTBm_FlGE_lLg2Ca24"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537389274658-st50o4l09oa6h11cohmgdh86p6076g19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,10 +25,18 @@
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.WelcomeActivity" />
 
-        <service
-            android:name=".view.NotificationDisplayService"
-            android:enabled="true"
-            android:exported="true"></service>
+        <service android:name=".service.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".view.VerifyActivity"></activity>
     </application>
 
 </manifest>
