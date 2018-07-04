@@ -45,6 +45,10 @@
         android:layout_marginLeft="@dimen/fab_margin"
         android:background="@drawable/btn_style_lanjut"
         android:gravity="center"
+        android:textColor="@color/White"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
         android:onClick="login"
         android:text="@string/login_button"
         android:textAllCaps="true" />
