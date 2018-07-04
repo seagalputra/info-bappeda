@@ -7,4 +7,11 @@
     <color name="Background">#f5c383</color>
     <color name="White">#FFFFFF</color>
     <color name="text">#FF424242</color>
+    <color name="Primary">#756867</color>
+    <color name="PrimaryDark">#493e3d</color>
+    <color name="PrimaryLight">#a49695</color>
+    <color name="Secondary">#ff8d3f</color>
+    <color name="SecondaryDark">#c65e0b</color>
+    <color name="SecondaryLight">#ffbe6e</color>
+    <color name="whiteDark">#cccccc</color>
 </resources>

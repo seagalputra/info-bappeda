@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "537389274658-i2krjdli6jir7daoolr5sqccetvbp59c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.go.jabarprov.bappeda.infobappeda",
+            "certificate_hash": "6ce56490f1ce5062cb8d89f8904cdb8657451dae"
+          }
+        },
+        {
           "client_id": "537389274658-st50o4l09oa6h11cohmgdh86p6076g19.apps.googleusercontent.com",
           "client_type": 3
         }
