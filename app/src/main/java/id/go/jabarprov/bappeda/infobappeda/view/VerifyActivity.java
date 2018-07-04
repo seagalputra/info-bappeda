@@ -14,8 +14,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import id.go.jabarprov.bappeda.infobappeda.R;
 import id.go.jabarprov.bappeda.infobappeda.service.NetworkService;
@@ -57,7 +55,6 @@ public class VerifyActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 otpCodeObj = response.toString();
-                Log.d(TAG_NAME, " OTP Code : " + otpCodeObj);
             }
         }, new Response.ErrorListener() {
             @Override

@@ -4,7 +4,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,23 +12,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import id.go.jabarprov.bappeda.infobappeda.R;
 import id.go.jabarprov.bappeda.infobappeda.adapter.MessageAdapter;
@@ -38,8 +31,6 @@ import id.go.jabarprov.bappeda.infobappeda.service.NetworkService;
 import id.go.jabarprov.bappeda.infobappeda.session.SessionManagement;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-
-    private static final String INTENT_EXTRA = "PHONE_NUMBER";
 
     // JSON URL DATA
     private static final String URL_DATA = "http://60.253.116.68/info_bappeda/send_msg.php";
