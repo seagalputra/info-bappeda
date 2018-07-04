@@ -34,11 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String INTENT_EXTRA = "PHONE_NUMBER";
     private static final String TAG_NAME = MainActivity.class.getSimpleName();
     private static final String URL_TOKEN = "http://60.253.116.68/meetingarranger/send_token/";
-    private RequestQueue requestQueue;
-    private Gson gson;
-    private List<Login> loginList = new ArrayList<>();
 
-    private SessionManagement sessionManagement;
     private EditText textPhone;
     private TextInputLayout phoneInputLayout;
 
@@ -47,26 +43,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Create object from SessionManagement class
-        sessionManagement = new SessionManagement(getApplicationContext());
-
         // Find all view depend it's id
         phoneInputLayout = findViewById(R.id.textphone_text_input_layout);
         textPhone = findViewById(R.id.textPhone);
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        // Set custom date format on the GSON instance to handle date that return by the API
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-        gson = gsonBuilder.create();
     }
 
     public void login(View view) {
         String phone = textPhone.getText().toString();
-        String token = FirebaseInstanceId.getInstance().getToken();
 
         if (phone.trim().length() > 0) {
-            sessionManagement.createLoginSession(phone, token);
             storeUserToken();
 
             Intent intent = new Intent(getApplicationContext(), VerifyActivity.class);

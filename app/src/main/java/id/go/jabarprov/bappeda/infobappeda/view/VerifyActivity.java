@@ -13,11 +13,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import id.go.jabarprov.bappeda.infobappeda.R;
 import id.go.jabarprov.bappeda.infobappeda.service.NetworkService;
+import id.go.jabarprov.bappeda.infobappeda.session.SessionManagement;
 
 public class VerifyActivity extends AppCompatActivity {
 
@@ -25,6 +27,8 @@ public class VerifyActivity extends AppCompatActivity {
     private static final String TAG_NAME = VerifyActivity.class.getSimpleName();
     private EditText otpEditText;
     private TextInputLayout otpInputLayout;
+
+    private SessionManagement sessionManagement;
 
     private String otpCodeObj;
     private Intent intent;
@@ -34,6 +38,8 @@ public class VerifyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify);
+
+        sessionManagement = new SessionManagement(getApplicationContext());
 
         otpEditText = findViewById(R.id.input_otp);
         otpInputLayout = findViewById(R.id.input_layout_otp);
@@ -65,9 +71,11 @@ public class VerifyActivity extends AppCompatActivity {
 
     public void verify(View view) {
         String otpCode = otpEditText.getText().toString();
+        String token = FirebaseInstanceId.getInstance().getToken();
 
         if (otpCode.trim().length() > 0) {
             if (otpCodeObj.equals(otpCode)) {
+                sessionManagement.createLoginSession(phoneNumber, token);
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
