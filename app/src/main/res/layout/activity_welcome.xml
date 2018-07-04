@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White">
+    android:background="@color/Background">
 
     <ImageView
         android:id="@+id/imageView"
@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
-        android:src="@drawable/ic_email"
+        android:src="@drawable/ic_billboard"
         android:contentDescription="Welcome Image"/>
 
     <TextView
@@ -49,7 +49,7 @@
         android:layout_alignParentStart="true"
         android:layout_margin="10dp"
         android:text="@string/btn_next"
-        android:textColor="#000000"
+        android:textColor="@color/White"
         android:background="@drawable/btn_style_lanjut" />
 
 </RelativeLayout>

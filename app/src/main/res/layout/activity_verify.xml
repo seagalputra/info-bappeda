@@ -17,7 +17,7 @@
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_clipboard" />
+        android:src="@drawable/ic_checklist" />
 
     <TextView
         android:id="@+id/otp_text"
@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="center"
+            android:inputType="phone"
             android:hint="@string/string_kode_otp"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -59,6 +60,7 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="@dimen/fab_margin"
         android:paddingBottom="@dimen/fab_margin"
+        android:textColor="@color/White"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="@string/button_otp"

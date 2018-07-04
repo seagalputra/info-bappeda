@@ -5,8 +5,8 @@
     <path android:fillColor="#5A6470" android:pathData="M228,40h16v48h-16V40z"/>
     <path android:fillColor="#5A6470" android:pathData="M324,40h16v48h-16V40z"/>
     <path android:fillColor="#5A6470" android:pathData="M420,40h16v48h-16V40z"/>
-    <path android:fillColor="#195C85" android:pathData="M4,88h464v256H4V88z"/>
-    <path android:fillColor="#143441" android:pathData="M4,376h464v32H4V376z"/>
+    <path android:fillColor="#56aab7" android:pathData="M4,88h464v256H4V88z"/>
+    <path android:fillColor="#046d7d" android:pathData="M4,376h464v32H4V376z"/>
     <path android:fillColor="#5A6470" android:pathData="M204,344h16v32h-16V344z"/>
     <path android:fillColor="#5A6470" android:pathData="M156,344h16v32h-16V344z"/>
     <path android:fillColor="#5A6470" android:pathData="M108,344h16v32h-16V344z"/>

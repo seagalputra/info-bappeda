@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="id.go.jabarprov.bappeda.infobappeda.view.SplashActivity"
-    android:background="@color/White">
+    android:background="@color/Background">
 
     <ImageView
         android:id="@+id/splash_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/ic_email"
+        android:src="@drawable/logobappeda"
         android:layout_centerInParent="true"
         android:contentDescription="Splash Image"/>
 
