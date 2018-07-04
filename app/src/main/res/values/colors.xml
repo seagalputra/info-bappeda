@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#795547</color>
+    <color name="colorPrimaryDark">#5a4236</color>
+    <color name="colorAccent">#ff9500</color>
     <color name="message_text_color">#333333</color>
-    <color name="Background">#f5c383</color>
+    <color name="Background">#f9f9f9</color>
     <color name="White">#FFFFFF</color>
+    <color name="Snow">#FFFAFA</color>
+    <color name="SmokeWhite">#F5F5F5</color>
     <color name="text">#FF424242</color>
     <color name="Primary">#756867</color>
     <color name="PrimaryDark">#493e3d</color>
@@ -14,4 +16,16 @@
     <color name="SecondaryDark">#c65e0b</color>
     <color name="SecondaryLight">#ffbe6e</color>
     <color name="whiteDark">#cccccc</color>
+    <color name="Beige">#F5F5DC</color>
+    <color name="Buff">#F0DC82</color>
+    <color name="BurntUmber">#8A3324</color>
+    <color name="Chestnut">#954535</color>
+    <color name="Khaki">#C3B091</color>
+    <color name="Peru">#CD853F</color>
+    <color name="RawUmber">#826644</color>
+    <color name="Tan">#D2B48C</color>
+    <color name="Taupe">#483C32</color>
+    <color name="WoodBrown">#C19A6B</color>
+    <color name="Krem">#FFFDD0</color>
+    <color name="brown">#efebe9</color>
 </resources>
